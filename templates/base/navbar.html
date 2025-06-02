@@ -1,0 +1,90 @@
+<header class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container-fluid">
+        <button class="navbar-toggler me-2 menutoggle" type="button">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <a class="navbar-brand fw-bold text-primary">AKSA</a>
+        
+        <div class="collapse navbar-collapse">
+            <form class="d-flex ms-auto me-3" method="GET" action="{% url 'search' %}">
+                <div class="input-group">
+                    <input class="form-control border-end-0" type="search" name="q" placeholder="Search..." 
+                           aria-label="Search" value="{{ request.GET.q }}">
+                    <button class="btn btn-outline-secondary border-start-0" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
+            
+            <ul class="navbar-nav">
+                <!-- Notifications -->
+                <li class="nav-item dropdown me-2">
+                    <a class="nav-link position-relative" href="#" id="alertsDropdown" role="button" 
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-bell text-gray-600"></i>
+                        {% if unread_alerts_count > 0 %}
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            {{ unread_alerts_count }}
+                        </span>
+                        {% endif %}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2 py-0" 
+                        aria-labelledby="alertsDropdown" style="width: 320px;">
+                        <li class="dropdown-header bg-light py-2 border-bottom">
+                            <h6 class="mb-0">Notifications</h6>
+                        </li>
+                        {% for alert in recent_alerts %}
+                        <li>
+                            <a class="dropdown-item py-3 border-bottom" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0 me-3">
+                                        <div class="bg-{{ alert.get_alert_type_color }} text-white rounded-circle p-2">
+                                            <i class="fas fa-{{ alert.get_icon }}"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <p class="mb-1 {% if not alert.is_read %}fw-bold{% endif %}">
+                                            {{ alert.message|truncatechars:40 }}
+                                        </p>
+                                        <small class="text-muted">{{ alert.created_at|timesince }} ago</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        {% empty %}
+                        <li>
+                            <a class="dropdown-item py-3 text-center text-muted">
+                                No new notifications
+                            </a>
+                        </li>
+                        {% endfor %}
+                        <li class="dropdown-footer bg-light py-2 text-center">
+                            <a href="{% url 'alert_list' %}" class="text-primary">View all</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- User Profile -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" 
+                       role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="avatar avatar-sm me-2">
+                            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" 
+                                 style="width: 36px; height: 36px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        <span class="d-none d-lg-inline">{{ request.user.username }}</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>

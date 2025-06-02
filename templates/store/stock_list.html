@@ -1,0 +1,40 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="header">
+    <h1>Stock Management</h1>
+    <a href="{% url 'add_stock' %}" class="btn btn-primary">Add Stock</a>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Supplier</th>
+            <th>Quantity</th>
+            <th>Last Updated</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stock in stocks %}
+        <tr>
+            <td>{{ stock.product.name }}</td>
+            <td>{{ stock.supplier.name }}</td>
+            <td>
+                {% if stock.quantity < 10 %}
+                <span class="badge bg-warning">Low</span>
+                {% endif %}
+                {{ stock.quantity }}
+            </td>
+            <td>{{ stock.date_added }}</td>
+            <td>
+                <a href="{% url 'update_stock' stock.id %}" class="btn btn-sm btn-primary">Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'low_stock' %}" class="btn btn-warning">View Low Stock Items</a>
+{% endblock %}

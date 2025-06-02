@@ -1,0 +1,30 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="header">
+    <h1>Update Stock</h1>
+    <a href="{% url 'stock_list' %}" class="btn btn-primary">Back to Stock</a>
+</div>
+
+<div class="card">
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Product</label>
+            <input type="text" value="{{ stock.product }}" readonly>
+        </div>
+        
+        <div class="form-group">
+            <label>Supplier</label>
+            <input type="text" value="{{ stock.supplier }}" readonly>
+        </div>
+        
+        <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input type="number" id="quantity" name="quantity" value="{{ stock.quantity }}" min="0" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Update Stock</button>
+    </form>
+</div>
+{% endblock %}

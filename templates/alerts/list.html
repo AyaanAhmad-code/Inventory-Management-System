@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Your Alerts</h2>
+    <div class="list-group">
+        {% for alert in alerts %}
+        <a href="#" class="list-group-item list-group-item-action {% if not alert.is_read %}list-group-item-warning{% endif %}">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{ alert.get_alert_type_display }}</h5>
+                <small>{{ alert.created_at|timesince }} ago</small>
+            </div>
+            <p class="mb-1">{{ alert.message }}</p>
+            <small>
+                <a href="{% url 'mark_alert_read' alert.id %}" class="text-muted">Mark as read</a>
+            </small>
+        </a>
+        {% empty %}
+        <div class="alert alert-info">No alerts to display</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

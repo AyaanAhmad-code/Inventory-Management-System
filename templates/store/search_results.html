@@ -1,0 +1,90 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Search Results for "{{ query }}"</h2>
+    
+    {% if products or orders or suppliers or buyers %}
+        <!-- Products Results -->
+        {% if products %}
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Products ({{ products.count }})</h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group">
+                    {% for product in products %}
+                    <a href="{% url 'product_detail' product.id %}" class="list-group-item list-group-item-action">
+                        {{ product.name }}
+                        <span class="badge bg-primary float-end">${{ product.price }}</span>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- Orders Results -->
+        {% if orders %}
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Orders ({{ orders.count }})</h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group">
+                    {% for order in orders %}
+                    <a href="{% url 'order_detail' order.id %}" class="list-group-item list-group-item-action">
+                        Order #{{ order.id }} - {{ order.product.name }}
+                        <span class="badge bg-{{ order.status_color }} float-end">{{ order.get_status_display }}</span>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- Suppliers Results -->
+        {% if suppliers %}
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Suppliers ({{ suppliers.count }})</h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group">
+                    {% for supplier in suppliers %}
+                    <a href="{% url 'supplier_detail' supplier.id %}" class="list-group-item list-group-item-action">
+                        {{ supplier.name }}
+                        <span class="text-muted float-end">{{ supplier.address }}</span>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- Buyers Results -->
+        {% if buyers %}
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Buyers ({{ buyers.count }})</h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group">
+                    {% for buyer in buyers %}
+                    <a href="{% url 'buyer_detail' buyer.id %}" class="list-group-item list-group-item-action">
+                        {{ buyer.name }}
+                        <span class="text-muted float-end">{{ buyer.address }}</span>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+    {% else %}
+        <div class="alert alert-info">
+            No results found for "{{ query }}"
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,254 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Dashboard{% endblock title %}
+
+{% block content %}
+<div class="dashboard-header mb-4">
+    <h1 class="h2 text-primary"><i class="fas fa-tachometer-alt"></i> Inventory Dashboard</h1>
+</div>
+
+<div class="row mb-4">
+    <!-- Order Card -->
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="card summary-card bg-primary text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title">ORDERS</h6>
+                        <h2 class="mb-0">{{ order }}</h2>
+                        <small class="text-white-50">Total orders</small>
+                    </div>
+                    <div class="icon-circle">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-primary-dark">
+                <a href="{% url 'order-list' %}" class="text-white small">View all orders <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Card -->
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="card summary-card bg-success text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title">PRODUCTS</h6>
+                        <h2 class="mb-0">{{ product }}</h2>
+                        <small class="text-white-50">In inventory</small>
+                    </div>
+                    <div class="icon-circle">
+                        <i class="fas fa-boxes"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-success-dark">
+                <a href="{% url 'product-list' %}" class="text-white small">view products <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Supplier Card -->
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="card summary-card bg-info text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title">SUPPLIERS</h6>
+                        <h2 class="mb-0">{{ supplier }}</h2>
+                        <small class="text-white-50">Active suppliers</small>
+                    </div>
+                    <div class="icon-circle">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-info-dark">
+                <a href="{% url 'supplier-list' %}" class="text-white small">View suppliers <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Buyer Card -->
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="card summary-card bg-warning text-dark">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title">BUYERS</h6>
+                        <h2 class="mb-0">{{ buyer }}</h2>
+                        <small class="text-dark-50">Active buyers</small>
+                    </div>
+                    <div class="icon-circle bg-warning-light">
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-warning-dark">
+                <a href="{% url 'buyer-list' %}" class="text-dark small">View buyers <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Orders Section -->
+<div class="card shadow-sm mb-4">
+    <div class="card-header bg-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0"><i class="fas fa-clipboard-list text-primary"></i> Recent Orders</h5>
+        <div class="dropdown">
+            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="orderFilterDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-filter"></i> Filter
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="orderFilterDropdown">
+                <a class="dropdown-item filter-order active" href="#" data-status="all">All Orders</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item filter-order" href="#" data-status="pending">Pending</a>
+                <a class="dropdown-item filter-order" href="#" data-status="approved">Approved</a>
+                <a class="dropdown-item filter-order" href="#" data-status="complete">Completed</a>
+                <a class="dropdown-item filter-order" href="#" data-status="decline">Declined</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead class="thead-light">
+                    <tr>
+                        <th width="50">#</th>
+                        <th>Supplier</th>
+                        <th>Product</th>
+                        <th>Design</th>
+                        <th>Color</th>
+                        <th>Buyer</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if orders %}
+                    {% for order in orders %}
+                    <tr data-status="{{ order.status }}" class="order-row">
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ order.supplier }}</td>
+                        <td>{{ order.product }}</td>
+                        <td>{{ order.design }}</td>
+                        <td>{{ order.color }}</td>
+                        <td>{{ order.buyer }}</td>
+                        <td>{{ order.created_date|date:"M d, Y" }}</td>
+                        <td>
+                            {% if order.status == 'pending' %}
+                                <span class="badge badge-pill badge-warning">{{ order.status }}</span>
+                            {% elif order.status == 'decline' %}
+                                <span class="badge badge-pill badge-danger">{{ order.status }}</span>
+                            {% elif order.status == 'complete' %}
+                                <span class="badge badge-pill badge-success">{{ order.status }}</span>
+                            {% elif order.status == 'approved' %}
+                                <span class="badge badge-pill badge-primary">{{ order.status }}</span>
+                            {% elif order.status == 'bulk' %}
+                                <span class="badge badge-pill badge-secondary">{{ order.status }}</span>
+                            {% else %}
+                                <span class="badge badge-pill badge-info">{{ order.status }}</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="8" class="text-center py-4 text-muted">No orders found</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer bg-white">
+        <a href="{% url 'order-list' %}" class="btn btn-sm btn-outline-primary">View All Orders</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+    .summary-card {
+        border: none;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+    
+    .summary-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .summary-card .card-footer {
+        border-top: none;
+        padding: 0.75rem 1.25rem;
+    }
+    
+    .bg-primary-dark { background-color: #0062cc; }
+    .bg-success-dark { background-color: #1e7e34; }
+    .bg-info-dark { background-color: #117a8b; }
+    .bg-warning-dark { background-color: #d39e00; }
+    
+    .icon-circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        background-color: rgba(255,255,255,0.2);
+    }
+    
+    .bg-warning-light {
+        background-color: rgba(255,255,255,0.3);
+    }
+    
+    .order-row:hover {
+        background-color: #f8f9fa;
+    }
+    
+    .media-icon {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .badge-pill {
+        padding: 0.35em 0.65em;
+    }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // Order filtering functionality
+    $('.filter-order').click(function(e) {
+        e.preventDefault();
+        const status = $(this).data('status');
+        
+        // Update active state
+        $('.filter-order').removeClass('active');
+        $(this).addClass('active');
+        
+        if (status === 'all') {
+            $('.order-row').show();
+        } else {
+            $('.order-row').hide();
+            $(`.order-row[data-status="${status}"]`).show();
+        }
+    });
+    
+    // Add animation to summary cards
+    $('.summary-card').each(function(index) {
+        $(this).delay(100 * index).animate({ opacity: 1 }, 300);
+    });
+});
+</script>
+{% endblock %}

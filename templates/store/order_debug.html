@@ -1,0 +1,37 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Order Debug: #{{ order.id }}</h2>
+    </div>
+    <div class="card-body">
+        <h4>Order Details</h4>
+        <p><strong>Product:</strong> {{ order.product }}</p>
+        <p><strong>Quantity:</strong> {{ order.quantity }}</p>
+        <p><strong>Status:</strong> {{ order.status }}</p>
+        
+        <h4 class="mt-4">Related Stock</h4>
+        {% with stock=order.product.stock_for_supplier(order.supplier) %}
+            {% if stock %}
+                <p><strong>Current Stock:</strong> {{ stock.quantity }}</p>
+                <p><strong>After Reduction:</strong> {{ stock.quantity|subtract:order.quantity }}</p>
+            {% else %}
+                <div class="alert alert-danger">No stock record found for this product/supplier!</div>
+            {% endif %}
+        {% endwith %}
+        
+        <h4 class="mt-4">Stock Movements</h4>
+        <table class="table">
+            <!-- List stock movements for this product -->
+        </table>
+        
+        <form method="post" action="{% url 'force_complete_order' order.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-warning">
+                Force Complete (Bypass Checks)
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

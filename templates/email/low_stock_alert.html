@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; }
+        .stock-table { width: 100%; border-collapse: collapse; }
+        .stock-table th, .stock-table td { border: 1px solid #ddd; padding: 8px; }
+        .stock-table th { background-color: #f2f2f2; }
+        .alert { color: #d9534f; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h2>Low Stock Alert</h2>
+    <p>The following items are below the threshold of {{ threshold }} units:</p>
+    
+    <table class="stock-table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Supplier</th>
+                <th>Current Quantity</th>
+                <th>Last Updated</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in low_stocks %}
+            <tr>
+                <td>{{ stock.product.name }}</td>
+                <td>{{ stock.supplier.name }}</td>
+                <td class="alert">{{ stock.quantity }}</td>
+                <td>{{ stock.date_added }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <p>Please replenish stock as soon as possible.</p>
+    <p><a href="{{ protocol }}://{{ domain }}{% url 'admin:inventory_stock_changelist' %}">View in Admin Panel</a></p>
+</body>
+</html>

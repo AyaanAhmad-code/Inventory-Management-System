@@ -1,0 +1,109 @@
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <h5 class="mb-0 text-center">
+            <i class="fas fa-boxes me-2"></i>
+            Inventory System
+        </h5>
+    </div>
+    
+    <nav class="nav flex-column mt-3">
+        <a href="{% url 'dashboard' %}" class="nav-link {% if request.path == '/' %}active{% endif %}">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+        </a>
+        
+        <div class="dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                <i class="fas fa-user-tie"></i>
+                <span>Suppliers</span>
+                <i class="" style="font-size: 0.75rem;"></i>
+            </a>
+            <ul class="dropdown-menu shadow border-0">
+                <li><a class="dropdown-item" href="{% url 'create-supplier' %}"><i class="fas fa-plus-circle me-2"></i>Add Supplier</a></li>
+                <li><a class="dropdown-item" href="{% url 'supplier-list' %}"><i class="fas fa-list me-2"></i>All Suppliers</a></li>
+            </ul>
+        </div>
+        
+        <div class="dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                <i class="fas fa-users"></i>
+                <span>Buyers</span>
+                <i class="" style="font-size: 0.75rem;"></i>
+            </a>
+            <ul class="dropdown-menu shadow border-0">
+                <li><a class="dropdown-item" href="{% url 'create-buyer' %}"><i class="fas fa-plus-circle me-2"></i>Add Buyer</a></li>
+                <li><a class="dropdown-item" href="{% url 'buyer-list' %}"><i class="fas fa-list me-2"></i>All Buyers</a></li>
+            </ul>
+        </div>
+        
+        <div class="dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Seasons</span>
+                <i class="" style="font-size: 0.75rem;"></i>
+            </a>
+            <ul class="dropdown-menu shadow border-0">
+                <li><a class="dropdown-item" href="{% url 'create-season' %}"><i class="fas fa-plus-circle me-2"></i>Add Season</a></li>
+                <li><a class="dropdown-item" href="{% url 'season-list' %}"><i class="fas fa-list me-2"></i>All Seasons</a></li>
+            </ul>
+        </div>
+        
+        <div class="dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                <i class="fas fa-tags"></i>
+                <span>Categories</span>
+                <i class="" style="font-size: 0.75rem;"></i>
+            </a>
+            <ul class="dropdown-menu shadow border-0">
+                <li><a class="dropdown-item" href="{% url 'create-drop' %}"><i class="fas fa-plus-circle me-2"></i>Add Category</a></li>
+                <li><a class="dropdown-item" href="{% url 'drop-list' %}"><i class="fas fa-list me-2"></i>All Categories</a></li>
+            </ul>
+        </div>
+        
+        <div class="dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                <i class="fas fa-box-open"></i>
+                <span>Products</span>
+                <i class="" style="font-size: 0.75rem;"></i>
+            </a>
+            <ul class="dropdown-menu shadow border-0">
+                <li><a class="dropdown-item" href="{% url 'create-product' %}"><i class="fas fa-plus-circle me-2"></i>Add Product</a></li>
+                <li><a class="dropdown-item" href="{% url 'product-list' %}"><i class="fas fa-list me-2"></i>All Products</a></li>
+            </ul>
+        </div>
+        
+        <div class="dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Orders</span>
+                <i class="" style="font-size: 0.75rem;"></i>
+            </a>
+            <ul class="dropdown-menu shadow border-0">
+                <li><a class="dropdown-item" href="{% url 'create-order' %}"><i class="fas fa-plus-circle me-2"></i>Create Order</a></li>
+                <li><a class="dropdown-item" href="{% url 'order-list' %}"><i class="fas fa-list me-2"></i>All Orders</a></li>
+            </ul>
+        </div>
+        
+        <div class="dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                <i class="fas fa-truck"></i>
+                <span>Deliveries</span>
+                <i class="" style="font-size: 0.75rem;"></i>
+            </a>
+            <ul class="dropdown-menu shadow border-0">
+                <li><a class="dropdown-item" href="{% url 'create-delivery' %}"><i class="fas fa-plus-circle me-2"></i>Add Delivery</a></li>
+                <li><a class="dropdown-item" href="{% url 'delivery-list' %}"><i class="fas fa-list me-2"></i>All Deliveries</a></li>
+            </ul>
+        </div>
+        
+        <a href="{% url 'stock_list' %}" class="nav-link">
+            <i class="fas fa-warehouse"></i>
+            <span>Stock Management</span>
+        </a>
+        
+        <a href="{% url 'report_list' %}" class="nav-link">
+            <i class="fas fa-chart-bar"></i>
+            <span>Reports</span>
+        </a>
+    </nav>
+</aside>

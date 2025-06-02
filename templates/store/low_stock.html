@@ -1,0 +1,44 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="header">
+    <h1>Low Stock Items</h1>
+    <a href="{% url 'stock_list' %}" class="btn btn-primary">Back to Stock</a>
+</div>
+
+<div class="card">
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Product</th>
+                <th>Supplier</th>
+                <th>Quantity</th>
+                <th>Last Updated</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in stocks %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ stock.product }}</td>
+                <td>{{ stock.supplier }}</td>
+                <td>
+                    <span class="badge badge-warning">Low</span>
+                    {{ stock.quantity }}
+                </td>
+                <td>{{ stock.date_added }}</td>
+                <td>
+                    <a href="{% url 'update_stock' stock.id %}" class="btn btn-primary">Update</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No low stock items found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
