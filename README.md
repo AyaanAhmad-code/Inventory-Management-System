@@ -1,5 +1,5 @@
  <div align="center">
-  <img src="https://res.cloudinary.com/murste/image/upload/v1698907632/stevolve_x8ioeu.png" alt="AKSA LOGO" width="100" />
+  <img src="https://github.com/AyaanAhmad-code/Inventory-Management-System/blob/9c3e37deb7199751e533cdd1771f8842b6d96db4/Untitled.png" alt="AKSA LOGO" width="100" />
 </div>
 
 # Inventory-Management-System
@@ -31,7 +31,7 @@ Follow these steps to install the necessary dependencies and set up the applicat
 ### Clone the Repository
 
 bash
-git clone https://github.com/AyaanAhmad-code/Inventory-Management-System.git
+git clone https://github.com/AyaanAhmad-code/Inventory-Management-System.git<br>
 cd Inventory-Management-System
 
 ### Without Docker
