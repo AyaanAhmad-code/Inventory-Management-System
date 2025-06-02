@@ -85,31 +85,24 @@ cd Inventory-Management-System
 <details>
   <summary>Click to view screenshots</summary>
 
-  ![screenshot_1]()
+  ![screenshot_1](https://github.com/AyaanAhmad-code/Inventory-Management-System/blob/db9528a1dd8820613eb801e64bdf96d65820f8db/Screenshot%202025-05-13%20222316.png)
 
-  ![screenshot_2]()
+  ![screenshot_2](https://github.com/AyaanAhmad-code/Inventory-Management-System/blob/db9528a1dd8820613eb801e64bdf96d65820f8db/Screenshot%202025-05-13%20222302.png)
 
-  ![screenshot_3]()
+  ![screenshot_3](https://github.com/AyaanAhmad-code/Inventory-Management-System/blob/db9528a1dd8820613eb801e64bdf96d65820f8db/Screenshot%202025-05-13%20222251.png)
 
-  ![screenshot_4]()
+  ![screenshot_4](https://github.com/AyaanAhmad-code/Inventory-Management-System/blob/db9528a1dd8820613eb801e64bdf96d65820f8db/Screenshot%202025-05-13%20222238.png)
 
-  ![screenshot_5]()
+  ![screenshot_5](https://github.com/AyaanAhmad-code/Inventory-Management-System/blob/db9528a1dd8820613eb801e64bdf96d65820f8db/Screenshot%202025-05-13%20222219.png)
 
-  ![screenshot_6]()
+  ![screenshot_6](https://github.com/AyaanAhmad-code/Inventory-Management-System/blob/db9528a1dd8820613eb801e64bdf96d65820f8db/Screenshot%202025-05-13%20222206.png)
 
-  ![screenshot_7]()
+  ![screenshot_7](https://github.com/AyaanAhmad-code/Inventory-Management-System/blob/db9528a1dd8820613eb801e64bdf96d65820f8db/Screenshot%202025-05-13%20222155.png)
 
-  ![screenshot_8]()
+  ![screenshot_8](https://github.com/AyaanAhmad-code/Inventory-Management-System/blob/db9528a1dd8820613eb801e64bdf96d65820f8db/Screenshot%202025-05-13%20222138.png)
 
-  ![screenshot_9]()
-
-  ![screenshot_10]()
-
-  ![screenshot_11]()
-
-  ![screenshot_12]()
-
-
+  ![screenshot_9](https://github.com/AyaanAhmad-code/Inventory-Management-System/blob/db9528a1dd8820613e
+  
 </details>
 
 ## Authors
